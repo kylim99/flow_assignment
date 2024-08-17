@@ -33,26 +33,16 @@ public class ExtensionEntity {
     @Column(name = "extension_name")
     private String extensionName;
 
-    @JsonProperty("isChecked")
-    @Column(name = "is_checked")
-    private boolean isChecked;
-
     @CreatedDate
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date createdAt;
-
-    @LastModifiedDate
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date updatedAt;
 
 
     @Override
     public String toString() {
         return "ExtensionEntity{" +
                 ", extensionName='" + extensionName + '\'' +
-                ", isChecked=" + isChecked +
                 ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

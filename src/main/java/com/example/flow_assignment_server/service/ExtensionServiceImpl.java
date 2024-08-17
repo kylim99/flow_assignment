@@ -31,7 +31,11 @@ public class ExtensionServiceImpl implements ExtensionService{
     @Transactional
     @Override
     public ResponseEntity delete(String extension) throws IllegalArgumentException{
-        System.out.println(extension);
+        Optional<ExtensionEntity> selectEntity = extensionRepository.findById(extension);
+
+        if(selectEntity.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
         extensionRepository.deleteById(extension);
         return ResponseEntity.ok().build();
     }
@@ -39,16 +43,15 @@ public class ExtensionServiceImpl implements ExtensionService{
 
     @Transactional
     @Override
-    public ResponseEntity update(String extension) {
+    public ResponseEntity update(String extension) throws IllegalArgumentException{
         Optional<ExtensionEntity> selectEntity = extensionRepository.findById(extension);
 
         if(selectEntity.isEmpty()){
             extensionRepository.save(ExtensionEntity.builder()
-                            .isChecked(true)
                             .extensionName(extension)
                             .build());
             return ResponseEntity.ok().build();
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().build();
     }
 }

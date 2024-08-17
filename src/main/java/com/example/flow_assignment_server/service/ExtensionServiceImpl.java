@@ -5,8 +5,10 @@ import com.example.flow_assignment_server.repository.ExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -16,15 +18,37 @@ public class ExtensionServiceImpl implements ExtensionService{
     ExtensionRepository extensionRepository;
 
     @Override
-    public ResponseEntity getExtensionList() {
+    public ResponseEntity getExtensionList() throws RuntimeException {
         List<ExtensionEntity> extensionEntityList = extensionRepository.findAll();
 
-
         if(extensionEntityList.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
 
+        return ResponseEntity.ok().body(extensionEntityList);
+    }
 
-        return ResponseEntity.ok(extensionEntityList);
+    @Transactional
+    @Override
+    public ResponseEntity delete(String extension) throws IllegalArgumentException{
+        System.out.println(extension);
+        extensionRepository.deleteById(extension);
+        return ResponseEntity.ok().build();
+    }
+
+
+    @Transactional
+    @Override
+    public ResponseEntity update(String extension) {
+        Optional<ExtensionEntity> selectEntity = extensionRepository.findById(extension);
+
+        if(selectEntity.isEmpty()){
+            extensionRepository.save(ExtensionEntity.builder()
+                            .isChecked(true)
+                            .extensionName(extension)
+                            .build());
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

@@ -1,5 +1,7 @@
 # Flow Coding Test
 
+
+
 ## 지원자
 임규진
 
@@ -10,6 +12,12 @@
 - **MySQL**
 - **Lombok**
 - **Gradle**
+- **js**
+- **AWS**
+
+## FE REPOSITORY
+
+- https://github.com/kylim99/flow_assignment_client
 
 ## 테이블 스키마
 

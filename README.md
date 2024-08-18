@@ -13,10 +13,10 @@
 
 ## 테이블 스키마
 
-| 변수          | 타입    | 설명         |
-|---------------|---------|--------------|
-| `extensionName` (PK) | `String` | 확장자 명     |
-| `createdAt`   | `Date`  | 추가 시간     |
+| 변수              | 타입    | 설명           |
+|-------------------|---------|----------------|
+| `extensionName` (PK) | `String` | 확장자 명       |
+| `createdAt`       | `Date`  | 추가 시간       |
 
 ## 과제 내용
 
@@ -52,7 +52,30 @@
       },
       ...
   ]
-```
-###Status Code:
+Status Code:
 200 OK: 데이터가 있을 경우
 203 NO CONTENT: 데이터가 없을 경우
+확장자 추가
+Endpoint: /api/extensions
+Method: POST
+Request Body:
+json
+코드 복사
+{
+    "extensionName": "jpg"
+}
+Response:
+201 CREATED: 확장자 추가 성공
+400 BAD REQUEST: 확장자가 이미 존재할 경우
+확장자 삭제
+Endpoint: /api/extensions/{extensionName}
+Method: DELETE
+Response:
+200 OK: 확장자 삭제 성공
+400 BAD REQUEST: 데이터베이스에 없는 확장자를 삭제 시
+테스트
+테스트는 JUnit4를 사용하여 진행합니다.
+
+확장자 조회 테스트: 확장자 목록을 올바르게 조회할 수 있는지 확인합니다.
+확장자 추가 테스트: 새로운 확장자를 추가하고, 데이터베이스와 UI에서 올바르게 반영되는지 확인합니다.
+확장자 수정 테스트: 유효하지 않은 확장자 값으로 수정 시, 적절한 오류를 반환하는지 확인합니다.

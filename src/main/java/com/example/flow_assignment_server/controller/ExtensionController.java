@@ -24,8 +24,8 @@ public class ExtensionController {
         return extensionService.delete(extension);
     }
 
-    @PostMapping(value = "/extension-update/{extension}")
-    public ResponseEntity updateExtension(@PathVariable String extension){
+    @PostMapping(value = "/extension-update")
+    public ResponseEntity updateExtension(@RequestBody String extension){
         return extensionService.update(extension);
     }
 

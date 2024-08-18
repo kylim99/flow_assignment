@@ -55,21 +55,21 @@
 Status Code:
 200 OK: 데이터가 있을 경우
 203 NO CONTENT: 데이터가 없을 경우
-확장자 추가
-Endpoint: /api/extensions
-Method: POST
-Request Body:
+### 확장자 추가
+- **Endpoint:**  /api/extensions
+- **Method:** POST
+- **Request Body:**
 json
-코드 복사
 {
     "extensionName": "jpg"
 }
 Response:
 201 CREATED: 확장자 추가 성공
 400 BAD REQUEST: 확장자가 이미 존재할 경우
-확장자 삭제
-Endpoint: /api/extensions/{extensionName}
-Method: DELETE
+### 확장자 추가
+- **Endpoint:**  /api/extensions/{extensionName}
+- **Method:** DELETE
+- **Request Body:**
 Response:
 200 OK: 확장자 삭제 성공
 400 BAD REQUEST: 데이터베이스에 없는 확장자를 삭제 시

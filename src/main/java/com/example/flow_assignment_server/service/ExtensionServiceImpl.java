@@ -17,6 +17,8 @@ public class ExtensionServiceImpl implements ExtensionService{
     @Autowired
     ExtensionRepository extensionRepository;
 
+    private String regex = "^[a-z]{1,20}$";
+
     @Override
     public ResponseEntity getExtensionList() throws RuntimeException {
         List<ExtensionEntity> extensionEntityList = extensionRepository.findAll();
@@ -45,6 +47,10 @@ public class ExtensionServiceImpl implements ExtensionService{
     @Override
     public ResponseEntity update(String extension) throws IllegalArgumentException{
         Optional<ExtensionEntity> selectEntity = extensionRepository.findById(extension);
+
+        if(extension.matches(regex)){
+            ResponseEntity.badRequest().build();
+        }
 
         if(selectEntity.isEmpty()){
             extensionRepository.save(ExtensionEntity.builder()
